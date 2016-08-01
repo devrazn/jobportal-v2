@@ -14,8 +14,6 @@ class Home extends CI_Controller {
 		$config["template"] = "template";
 		$config["ttl"]      = 0;
 		$this->template->initialize($config);
-		$this->data['sidebar_jobs'] = $this->home_model->get_latest_jobs();
-		$this->data["sidebar_categories"] = $this->home_model->get_job_categories();
 	}
 
 
@@ -25,7 +23,9 @@ class Home extends CI_Controller {
 	
 	
 	public function landing() {
-        $this->session->set_userdata('referred_from', current_url());
+        $this->template->stylesheet->add(base_url().'assets/front/css/bootstrap.min.css');
+        $this->template->javascript->add(base_url().'assets/front/js/jquery.min.js');
+        $this->template->javascript->add(base_url().'assets/front/js/bootstrap.min.js');
 		$this->data["content_jobs"] = $this->home_model->get_jobs();
 		//echo '<pre>',print_r($this->data["content_jobs"],1),'</pre>'; exit;
 		$this->data["sliders"] = $this->home_model->get_slider();
